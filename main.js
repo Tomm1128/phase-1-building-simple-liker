@@ -14,7 +14,7 @@ const handleError = err => {
   }, 3000)
 }
 
-const handleLikeBtn = (event) => {
+const handleLikeBtn = event => {
   if(event.target.innerText === EMPTY_HEART){
     mimicServerCall()
     .then(() => {
@@ -34,11 +34,7 @@ const handleLikeBtn = (event) => {
   }
 }
 
-likeBtns.forEach((btn) => {
-  btn.addEventListener("click", handleLikeBtn)
-})
-
-
+likeBtns.forEach(btn => btn.addEventListener("click", handleLikeBtn))
 
 //------------------------------------------------------------------------------
 // Don't change the code below: this function mocks the server response
