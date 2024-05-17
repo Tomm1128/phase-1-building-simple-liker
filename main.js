@@ -4,36 +4,34 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 const likeBtns = document.querySelectorAll("span.like-glyph")
+const errorBlock = document.querySelector("div#modal.hidden")
+
+const handleError = err => {
+  errorBlock.classList.remove("hidden")
+  errorBlock.innerText = err 
+  setTimeout(() => {
+    errorBlock.className = "hidden"
+  }, 3000)
+}
+
 likeBtns.forEach((btn) => {
   btn.addEventListener("click", (event) => {
     if(event.target.innerText === EMPTY_HEART){
       mimicServerCall()
       .then(() => {
+        errorBlock.className = "hidden"
         event.target.className = "activated-heart" 
         event.target.innerText = FULL_HEART
       })
-      .catch((response) => {
-        const errorBlock = document.querySelector("div#modal.hidden")
-        errorBlock.classList.remove("hidden")
-        errorBlock.innerText = response 
-        setTimeout(() => {
-          errorBlock.className = "hidden"
-        }, 3000)
-      })
+      .catch(handleError)
     } else {
       mimicServerCall()
       .then(() => {
+        errorBlock.className = "hidden"
         event.target.classList.remove("activated-heart" )
         event.target.innerText = EMPTY_HEART
       })
-      .catch((response) => {
-        const errorBlock = document.querySelector("div#modal.hidden")
-        errorBlock.classList.remove("hidden")
-        errorBlock.innerText = response 
-        setTimeout(() => {
-          errorBlock.className = "hidden"
-        }, 3000)
-      })
+      .catch(handleError)
     }
   })
 })
