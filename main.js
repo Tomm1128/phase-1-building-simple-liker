@@ -4,6 +4,13 @@ const FULL_HEART = '♥'
 
 // Your JavaScript code goes here!
 
+const likeBtns = document.querySelectorAll("li.like")
+likeBtns.forEach((btn) => {
+  btn.addEventListener("click", (event) => {
+    event.target.className = "activated-heart" 
+    console.log("i have been clicked")
+  })
+})
 
 
 
