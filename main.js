@@ -15,23 +15,18 @@ const handleError = err => {
 }
 
 const handleLikeBtn = event => {
-  if(event.target.innerText === EMPTY_HEART){
-    mimicServerCall()
-    .then(() => {
-      errorBlock.className = "hidden"
+  mimicServerCall()
+  .then(() => {
+    errorBlock.className = "hidden"
+    if(event.target.innerText === EMPTY_HEART){
       event.target.className = "activated-heart" 
       event.target.innerText = FULL_HEART
-    })
-    .catch(handleError)
-  } else {
-    mimicServerCall()
-    .then(() => {
-      errorBlock.className = "hidden"
+    } else {
       event.target.className = "like-glyph"
       event.target.innerText = EMPTY_HEART
-    })
-    .catch(handleError)
-  }
+    }
+  })
+  .catch(handleError)
 }
 
 likeBtns.forEach(btn => btn.addEventListener("click", handleLikeBtn))
